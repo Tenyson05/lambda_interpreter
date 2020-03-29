@@ -1,0 +1,89 @@
+/**********  NOTES  **********/
+
+
+/*
+Expression can be - variable, an abstraction or a function
+
+Variable - an expression that evaluates to a value
+JS - const x
+Lambda - x
+
+An abstraction - expression that evaluares to an anonymous function
+JS - x => x;
+Lambda λx.x
+
+JS: x => x ** 2
+lambda: λx.x^2 
+
+Function Application - writing an expression that applies a value to a function
+
+JS: (x => x)(10)
+lambda λx.x 10
+
+JS: (x => x ** 2)(y)
+lambda: (λx.x^2)(y) //y can be any variable
+
+Abstraction: a function with no value applied to it
+JS: const SQUARE = x => x ** 2 //to make this an application you have to apply a value as seen below
+SQUARE(X)
+
+*** ISSUE ***
+Functions in Lambda calculus should only have one argument but we need more than one argument
+*** ISSUE ***
+
+
+*** Solution ***
+CURRYING - is a  technique of translating the evaluation of a function that takes multiple
+			arguments into evaluation a sequence of functions, each with a single argument
+			A.K.A Recursion - a function calling itself inside of itself (LOL)
+*** Solution ***
+
+JS: const SUM = x => y => x + y;
+Instead of returing the sum of given x and y arguments, we're creating a SUM function which
+takes x and retuns the same function which takes y as it's only argument. The function 
+will then return the sum of x and y
+SUM(4)(5)
+
+Lambda: λx.(λy.x + y)
+
+
+TRUE or FALSE conditional statements
+To achieve this we declare a function which takes TRUE as it's argument and returns a 
+function that takes FALSE as it's argument. We then decide if the returning value should be
+TRUE or FALSE
+JS: const TRUE = x => y => x
+	const FALSE = x => y => y
+
+Lambda: λx.(λy.x) //True
+		λx.(λy.y) //False 
+
+Condition to determine if value is TRUE or False
+
+JS: const IF = COND => THEN => ELSE => COND(THEN)(ELSE)
+Lambda: λz.(λx.(λy. z x y))
+
+*/
+
+
+const ADD = x => y => x + y;
+
+const SUB = x => y => x - y;
+
+const DIV = x => y => x / y;
+
+const MUL = x => y => x * y;
+
+console.log(SUB(3)(1))
+
+//###############################################
+                  // GRAMMER
+<expr> ::= <var> | <func> <arg> | λ<var>.<exp>
+
+<func> ::= <var> | (λ<var>.<exp>) | <func> <exp>
+
+<arg> ::= <var> | (λ<var>.<exp>) | <func> <exp>
+
+<var> ::= a|b|c|d....|e
+
+
+//###############################################
